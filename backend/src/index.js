@@ -3,7 +3,8 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import { getBlogContent, getBlogData } from "./scrapblog.js";
+import blogRouter from './routes/index.js'
+// import { runScrapper } from "./scrapblog.js";
 
 // config dotenv
 dotenv.config();
@@ -13,6 +14,8 @@ const app = express();
 
 // use all app functions
 app.use(express.json());
+
+app.use('/blogs', blogRouter);
 
 // enable cors
 app.use(cors({
@@ -37,6 +40,7 @@ let PORT=5000;
 app.listen(PORT, ()=>{
     connectDB();     // Connect Database here 
     console.log(`Server Started  : http://localhost:${PORT}`);
+    // runScrapper();
 });
 
 // Health check route

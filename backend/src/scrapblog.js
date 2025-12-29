@@ -1,5 +1,6 @@
 import * as cheerio from 'cheerio';
 import axios from "axios";
+import { blogModel } from './model/blog.model.js';
 
 // Define Blogs Array to store every data
 let blogs = []
@@ -126,19 +127,41 @@ export const getBlogContent = async () => {
      
 }
 
-const runScrapper = async ()=>{
+// Save the blogs into Databse
+async function seedblog () {
+    try {
+        for (let blog of blogs){
+            const newBlog = new blogModel({
+                title : blog.title,
+                author : blog.author,
+                content : blog.content,
+                date : blog.date,
+                likes : 0,
+                image : blog.image,
+                topic : blog.topics,
+                isUpdated : false,
+            })
+            await newBlog.save();
+        }
+        console.log("All Blogs Saved successfully into Database..");
+    }
+    catch(error){
+        console.error("Error while saving blog in database", error);
+    }
+}
+
+export const runScrapper = async ()=>{
     await getBlogData();
     if (blogs.length > 0){
         await getBlogContent();
     }
-    console.log("Result Sample : ", blogs[0]);
-    console.log(`Content : ${blogs[0].content}`);
     console.log(`Total Blogs Scrapped : ${blogs.length}`);
+    await seedblog();
 
     return blogs;
 }
 
-runScrapper();
+
 
 
 

@@ -3,15 +3,17 @@ import mongoose from "mongoose";
 const blogSchema = new mongoose.Schema({
     title : {
         type : String,
-        required : true
+        required : true,
+        unique : true,
+        trim : true
     },
     content : {
         type :String,
         required : true
     },
     image : {
-        type : String,
-        deafult : null
+        type : [String],
+        default : null
     },
     author : {
         type : String,
@@ -22,7 +24,7 @@ const blogSchema = new mongoose.Schema({
         required : true
     },
     topic : {
-        type : String,
+        type : [String],
         default : null
     },
     likes : {
@@ -34,9 +36,9 @@ const blogSchema = new mongoose.Schema({
         default : false
     }
     ,
-    refrences : {
+    references : {
         type : [String],   // refrences 
-        default : [null]
+        default : []
     }
 });
 
