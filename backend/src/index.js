@@ -1,10 +1,8 @@
 // Import all necessary packages
 import express from "express";
 import cors from "cors";
-import mongoose from "mongoose";
-import dotenv from "dotenv";
 import blogRouter from './routes/index.js'
-// import { runScrapper } from "./scrapblog.js";
+import { connectDB } from "./config/db.js";
 
 // config dotenv
 dotenv.config();
@@ -24,27 +22,15 @@ app.use(cors({
     credentials : true
 }));
 
-// Function to connect database
-async function connectDB (){
-    try{
-        await mongoose.connect(process.env.MONGO_URI);
-        console.log("Database Connected Successfully");
-    }
-    catch(error){
-        console.error("Error in connecting Databased : ", error);
-    }
-}
-
 // Listen to Server
 let PORT=5000;
 app.listen(PORT, ()=>{
     connectDB();     // Connect Database here 
     console.log(`Server Started  : http://localhost:${PORT}`);
-    // runScrapper();
 });
 
 // Health check route
-app.get("/",(req, res)=>{
+app.get("/",(_req, res)=>{
     res.send("API Working .....");
 })
 
