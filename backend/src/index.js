@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import { getBlogContent, getBlogData } from "./scrapblog.js";
 
 // config dotenv
 dotenv.config();
@@ -42,4 +43,7 @@ app.listen(PORT, ()=>{
 app.get("/",(req, res)=>{
     res.send("API Working .....");
 })
+
+
+
 
