@@ -5,7 +5,8 @@ import { blogModel } from '../model/blog.model.js';
 // Define Blogs Array to store every data
 let blogs = []
 
-export const getBlogData = async () => {
+// Phase : 1 Gets Blog data from BeyondChats and saves into Database
+export const intialBlogData = async () => {
 
     try {
         // Define URL and start scraping 
@@ -48,7 +49,7 @@ export const getBlogData = async () => {
     }
 }
 
-export const getBlogContent = async () => {
+export const mainBlogData = async () => {
     const seen = new Set();
     console.log(`Starting to Fetch content For Blog : ${blogs.length} Blogs..`);
 
@@ -150,6 +151,9 @@ export async function seedblog () {
         console.error("Error while saving blog in database", error);
     }
 }
+
+
+
 
 
 

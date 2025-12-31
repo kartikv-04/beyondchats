@@ -6,6 +6,7 @@ import { seedblog } from "./scrapblog.js";
 // Function To run seed blog 
 export const scrapIntialBlog = async ()=>{
     try {
+
         // Connect to database first
         await connectDB();
 
