@@ -56,28 +56,39 @@ const buildPrompt = (title, originalContent, sources) => {
 
   const references = sources.map((s, i) => `${i + 1}. ${s.url}`).join("\n");
 
+
   return `You are a professional blog content editor. Update the original article to match the quality of top-ranking Google articles.
 
-                Tasks:
-                1. Restructure content to be well-organized, engaging, and professional
-                2. Integrate valuable information from scraped sources
-                3. Improve readability with proper headings and formatting
-                4. Make it SEO-friendly and publication-ready
+      Tasks:
+      1. Restructure the content to be clear, engaging, and professional
+      2. Integrate valuable information from the provided sources
+      3. Improve readability with proper headings and logical flow
+      4. Make the article SEO-friendly and publication-ready
 
-                Add a References section at the end:
-                ---
-                References:
-                ${references}
+      Formatting rules (IMPORTANT):
+      - Use Markdown for headings, subheadings, lists, and bold text
+      - Ensure there is a blank line before and after every heading
+      - Do NOT use any HTML tags
+      - Keep formatting clean and consistent
+      - Do NOT include code blocks or explanations
 
-                Original Blog Title: ${title}
+      Add a final "References" section using Markdown lists with the provided URLs.
 
-                Original Content:
-                ${originalContent}
+      Original Blog Title:
+      ${title}
 
-                Top-Ranking Articles:
-                ${scrapedText}
+      Original Content:
+      ${originalContent}
 
-                Provide only the formatted blog content with References section. No explanations.`;
+      Top-Ranking Articles:
+      ${scrapedText}
+
+      References:
+      ${references}
+
+      Return only the rewritten blog content in Markdown. No explanations.`;
+
+
 };
 
 // 4.2. Process content through LLM

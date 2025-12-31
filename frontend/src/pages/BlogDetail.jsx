@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import ReactMarkdown from "react-markdown";
 
 const API_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
 
@@ -77,9 +78,14 @@ const BlogDetail = () => {
             )}
 
             {/* Main Content */}
-            <div className="prose prose-lg max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-blue-600 text-gray-800 leading-relaxed whitespace-pre-line">
-                {blog.content}
+            <div className="prose prose-lg max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-blue-600 text-gray-800 leading-relaxed">
+                {blog.isUpdated ? (
+                    <ReactMarkdown>{blog.content}</ReactMarkdown>
+                ) : (
+                    <div className="whitespace-pre-line">{blog.content}</div>
+                )}
             </div>
+
 
             {/* References Section */}
             {blog.references && blog.references.length > 0 && (
