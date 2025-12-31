@@ -14,19 +14,19 @@ const app = express();
 // use all app functions
 app.use(express.json());
 
-app.use('/blogs', blogRouter);
-
-// enable cors
+// enable cors - must be before routes
 app.use(cors({
-    origin: '*',
-    methods: ["GET", "POST", "PATCH"],
+    origin: process.env.CLIENT_URL || '*',
+    methods: ["GET", "POST", "PATCH", "DELETE"],
     credentials: true
 }));
 
+app.use('/blogs', blogRouter);
+
 // Listen to Server
-let PORT = 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-    connectDB();     // Connect Database here 
+    connectDB();
     console.log(`Server Started: http://localhost:${PORT}`);
 });
 

@@ -1,19 +1,17 @@
 import { connectDB } from "../config/db.js";
-import { getBlogData } from "./scrapblog.js";
-import { getBlogContent } from "./scrapblog.js";
-import { seedblog } from "./scrapblog.js";
+import { intialBlogData, mainBlogData, seedblog } from "./scrapblog.js";
 
 // Function To run seed blog 
-export const scrapIntialBlog = async ()=>{
+export const scrapIntialBlog = async () => {
     try {
 
         // Connect to database first
         await connectDB();
 
         // Get initial blog data
-        let blogs = await getBlogData();
-        if (blogs.length > 0){
-            await getBlogContent();   //Get link from blogs array and scrap main content
+        let blogs = await intialBlogData();
+        if (blogs.length > 0) {
+            await mainBlogData();   //Get link from blogs array and scrap main content
         }
         console.log(`Total Blogs Scrapped : ${blogs.length}`);
 
@@ -22,7 +20,7 @@ export const scrapIntialBlog = async ()=>{
 
         return blogs;
     }
-    catch(error){
+    catch (error) {
         console.error("Error while seeding Blogs", error);
     }
 }

@@ -69,12 +69,12 @@ export const getBlog = async (req, res) => {
     try {
         console.log("Get request recieveed")
         // Try getting All blogs from database
-        const blog = await blogModel.find();
+        const blogs = await blogModel.find();
 
         // return all blog in array
         return res.status(200).json({
             success: true,
-            message: [blog]
+            message: blogs
         })
     }
     catch (error) {
@@ -89,21 +89,21 @@ export const getBlog = async (req, res) => {
 export const getOneBlog = async (req, res) => {
     try {
         // Destructure the body
-        const { blogId } = req.params;
+        const { id } = req.params;
 
         // Check if it is not empty
-        if (!blogId) {
+        if (!id) {
             return res.status(400).json({
                 succes: false,
                 message: "Got Empty Fields"
             })
         }
 
-        // find blog with blogid
-        const blog = await blogModel.findOne({ blogId });
+        // find blog with _id
+        const blog = await blogModel.findById(id);
 
         //return that blog
-        return res.staus(200).json({
+        return res.status(200).json({
             success: true,
             message: blog
         })
