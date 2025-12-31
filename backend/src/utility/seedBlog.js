@@ -27,4 +27,5 @@ export const scrapIntialBlog = async ()=>{
     }
 }
 
-scrapIntialBlog();
+// Export function - remove immediate execution for orchestrator
+// scrapIntialBlog();

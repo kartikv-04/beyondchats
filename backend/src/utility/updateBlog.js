@@ -19,9 +19,6 @@ const CACHE_PATH = path.join(process.cwd(), 'cache', 'blogContent.json');
 
 dotenv.config();
 
-// Connect to Database First
-await connectDB();
-
 // 1. Get the Blog titles from database
 const getBlogTitle = async()=>{
     try {
@@ -208,7 +205,6 @@ const scrapMainContent = async ()=> {
     }
 };
 
-
-
-scrapMainContent();
+// Export function for use in orchestrator
+export { scrapMainContent };
 

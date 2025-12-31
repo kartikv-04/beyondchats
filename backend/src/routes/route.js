@@ -5,8 +5,8 @@ import { getBlog, getOneBlog, postBlog } from "../controller/blog.controller.js"
 const router = Router();
 
 // POST, GET For Blogs
-router.post('blogs', postBlog);
+router.post('/', postBlog);
 router.get('/', getBlog);
-router.get('blogs/:id', getOneBlog);
+router.get('/:id', getOneBlog);
 
 export default router;
