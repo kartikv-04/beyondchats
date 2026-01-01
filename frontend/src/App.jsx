@@ -19,7 +19,7 @@ const App = () => {
         </main>
 
         <footer className="py-12 text-center text-sm text-gray-600 border-t border-gray-200 mt-20">
-          <p>© 2024 BeyondChats. All rights reserved.</p>
+          <p>© 2026 BeyondChats. All rights reserved.</p>
         </footer>
       </div>
     </Router>
